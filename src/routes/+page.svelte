@@ -1,10 +1,6 @@
 <script lang="ts">
-import { projectId, chains, wagmiConfig, address, chain } from '$lib/wagmi';
-import { createWeb3Modal } from '@web3modal/wagmi';
-
-createWeb3Modal({ wagmiConfig, projectId, chains, themeMode: 'dark' })
+import { address, chain } from '$lib/wagmi';
 </script>
-
 
 <div class="container" >
   <h1>Welcome to SvelteKit & Web3Modal</h1>

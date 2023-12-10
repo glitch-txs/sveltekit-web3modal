@@ -2,7 +2,7 @@ import { getAccount, getNetwork, watchAccount, watchNetwork } from "@wagmi/core"
 import type { Chain, GetAccountResult, GetNetworkResult, PublicClient } from "@wagmi/core"
 import { readable } from "svelte/store"
 
-import { defaultWagmiConfig } from '@web3modal/wagmi'
+import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi'
 
 import { mainnet, arbitrum } from 'viem/chains'
 
@@ -17,6 +17,8 @@ const metadata = {
 
 export const chains = [mainnet, arbitrum]
 export const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
+
+createWeb3Modal({ wagmiConfig, projectId, chains, themeMode: 'dark' })
 
 export const address = readable<`0x${string}` | undefined>(getAccount().address, (set) => {
   function onAccountChange(account: GetAccountResult<PublicClient>){
