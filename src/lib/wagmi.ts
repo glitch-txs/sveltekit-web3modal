@@ -1,5 +1,4 @@
 import { getAccount, getNetwork, watchAccount, watchNetwork } from "@wagmi/core"
-import type { Chain, GetAccountResult, GetNetworkResult, PublicClient } from "@wagmi/core"
 import { readable } from "svelte/store"
 
 import { createWeb3Modal, defaultWagmiConfig } from '@web3modal/wagmi'
@@ -20,18 +19,6 @@ export const wagmiConfig = defaultWagmiConfig({ chains, projectId, metadata })
 
 createWeb3Modal({ wagmiConfig, projectId, chains, themeMode: 'dark' })
 
-export const address = readable<`0x${string}` | undefined>(getAccount().address, (set) => {
-  function onAccountChange(account: GetAccountResult<PublicClient>){
-    set(account.address)
-  }
+export const network = readable(getNetwork(), (set)=>watchNetwork(set))
+export const account = readable(getAccount(), (set)=>watchAccount(set))
 
-  return watchAccount(onAccountChange)
-})
-
-export const chain = readable<Chain['name'] | undefined>(getNetwork().chain?.name, (set)=>{
-  function onChainChange(network: GetNetworkResult){
-    set(network.chain?.name)
-  }
-
-  return watchNetwork(onChainChange)
-})

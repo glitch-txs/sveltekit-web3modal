@@ -1,12 +1,12 @@
 <script lang="ts">
-import { address, chain } from '$lib/wagmi';
+import { account, network } from '$lib/wagmi';
 </script>
 
 <div class="container" >
   <h1>Welcome to SvelteKit & Web3Modal</h1>
   <div>
-    <div>user address: {$address}</div>
-    <div>Connected chain: {$chain}</div>
+    <div>user address: {$account.address}</div>
+    <div>Connected chain: {$network.chain?.name}</div>
   </div>
   <w3m-button/>
 </div>
